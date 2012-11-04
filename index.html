@@ -32,31 +32,35 @@
     <h2>What is Glazz?</h2>
 
     <p>
-      Glazz models vision in a 2D world.
+      A library that models vision in a 2D world.
     </p>
 
-    <div class="demo_holder"><canvas id="sonar" width="200" height="200"></canvas></div>
-    <div class="demo_description">
-      A <strong>sonar</strong> rotates, shooting out a single beam.  If the beam hits
-      a circle, the circle is momentarily marked.
-      <br/></br/>
-      Learn <a href='#lookto'>more</a> about <code>lookTo()</code>.
-    </div>
+    <div class="demos">
+      <div class="demo_holder"><canvas id="sonar" width="200" height="200"></canvas></div>
+      <div class="demo_description">
+        A <strong>sonar</strong> rotates, shooting out a single beam.  If the beam hits
+        a circle, the circle is momentarily marked.
+        <br/></br/>
+        Learn <a href="#lookto">more</a> about <code>lookTo()</code>.
+      </div>
 
-    <div class="demo_holder"><canvas id="floodlights" width="200" height="200"></canvas></div>
-    <div class="demo_description">
-      A <strong>floodlight</strong> rotates.
-      If any circles are caught in its span, they are lit up.
-      <br/></br/>
-      Learn <a href='#lookto'>more</a> about <code>lookAcross()</code>.
-    </div>
+      <div class="demo_holder">
+        <canvas id="floodlights" width="200" height="200"></canvas>
+      </div>
+      <div class="demo_description">
+        A <strong>floodlight</strong> rotates.
+        If any circles are caught in its span, they are lit up.
+        <br/></br/>
+        Learn <a href="#lookto">more</a> about <code>lookAcross()</code>.
+      </div>
 
-    <div class="demo_holder"><canvas id="spotter" width="200" height="200"></canvas></div>
-    <div class="demo_description">
-      Intelligence feeds coordinates of new circle sightings to a <strong>spotter</strong>.  The spotter
-      sights the coordinates.  If they see a circle, they momentarily mark it.
-      <br/></br/>
-      Learn <a href='#lookto'>more</a> about <code>lookAt()</code>.
+      <div class="demo_holder"><canvas id="spotter" width="200" height="200"></canvas></div>
+      <div class="demo_description">
+        Intelligence feeds coordinates of new circle sightings to a <strong>spotter</strong>.
+        The spotter sights the coordinates.  If they see a circle, they momentarily mark it.
+        <br/></br/>
+        Learn <a href="#lookto">more</a> about <code>lookAt()</code>.
+      </div>
     </div>
 
     <h2>Can I see an example?</h2>
@@ -125,7 +129,7 @@
 </pre>
 
     <p>
-      The object moves.  Update the solidity map.
+      The object moves.  Update the solidity map with its new position.
     </p>
 
 <pre class="prettyprint">
@@ -249,7 +253,7 @@
       <strong>obj</strong> object to look at.<br/>
       <strong>overlook (optional)</strong> array of materials that should be overlooked
       when raycasting. Overrides default overlook.<br/>
-      <strong>returns</strong> Endpoint object.<br/>
+      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
@@ -266,7 +270,7 @@
       <strong>vector</strong> direction to look in.<br/>
       <strong>overlook (optional)</strong> array of materials that should be overlooked
       when raycasting. Overrides default overlook.<br/>
-      <strong>returns</strong> Endpoint object.<br/>
+      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
@@ -283,16 +287,16 @@
       <strong>objs</strong> objects to survey.<br/>
       <strong>facing</strong> angle in degrees of centre of gaze.<br/>
       <strong>fov</strong> angle in degrees of left to right span of gaze.<br/>
-      <strong>returns</strong> Endpoint object.<br/>
+      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
       Filters out all the passed objects that do not fall in the passed span.
       Calls <a href="#lookat"><code>lookAt</code></a> for each remaining
-      object and returns corresponding <code>Endpoint</code> objects.
+      object and returns corresponding <a href="#endpoint"><code>Endpoint</code></a> objects.
     </p>
 
-    <h3>Endpoint</h3>
+    <h3><a id="endpoint"></a>Endpoint</h3>
 
     <p>
       Represents the place a cast ray hit.

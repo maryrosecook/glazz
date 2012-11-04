@@ -27,6 +27,6 @@ hr { color: #aaa; background-color:#aaa; height:1px; border:0; }
 ol { padding-left: 16px; }
 li { padding: 5px 0 5px 0; }
 
-/* .demo_description { width: 160px;  } */
+.demos { margin-top:17px; margin-bottom:-10px; }
 .demo_holder { float:left; margin-right: 10px; }
 .demo_description { padding-top:9px; height:200px; }
