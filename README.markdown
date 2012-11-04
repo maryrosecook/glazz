@@ -48,7 +48,7 @@ of your world.  This initialises every solidity map cell to 0, the empty materia
 
 Define an <code>Obj</code> constructor that includes <code>getPosition()</code>,
 <code>getSize()</code> and <code>getMaterial()</code> accessors.  Use it to
-instantiate an actor.
+instantiate the actor, the object that will have eyes.
 
     var Obj = function(posX, posY, sizeX, sizeY) {
       this.pos = { x:posX, y:posY };
