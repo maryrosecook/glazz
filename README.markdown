@@ -6,11 +6,9 @@
 
 Give your objects eyes.
 
-## Quick start
+## Get the code
 
-### Get the code
-
-#### npm
+### npm
 
 To install npm, visit https://github.com/isaacs/npm
 
@@ -18,30 +16,29 @@ Install Glazz
 
     $ npm install glazz
 
-#### Git
+### Git
 
     $ git clone git://github.com/maryrosecook/glazz.git
 
-### Import the code
+## Import the code
 
-#### node
+### node
 
     var SolidityMap = require('solidityMap').SolidityMap;
     var Glazz = require('glazz').glazz;
 
-#### Browser
+### Browser
 
     <script type="text/javascript" src="glazz.js"></script>
     <script type="text/javascript" src="solidityMap.js"></script>
     <script type="text/javascript" src="raytracer.js"></script>
     <script type="text/javascript" src="eyes.js"></script>
 
-### Documentation
+## Documentation
 
 See `/index.html`
 
-### Quick coding start
-
+## Example
 
 
 ## Run the tests
