@@ -1,0 +1,312 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Glazz</title>
+
+    <link type="text/css" rel="stylesheet" href="resources/main.css" />
+    <link type="text/css" rel="stylesheet" href="resources/prettify.css" />
+
+    <script src="/resources/prettify.js"></script>
+    <script src="/resources/head.loader.js"></script>
+    <script type="text/javascript">
+      head.js("/resources/jquery.1.6.1.js",
+              "/node_modules/underscore/underscore-min.js",
+              "/src/glazz.js",
+              "/src/solidityMap.js",
+              "/src/raytracer.js",
+              "/src/eyes.js",
+              "/resources/helper.js",
+              "/resources/sonar.js",
+              "/resources/floodlights.js",
+              "/resources/spotter.js"
+             );
+    </script>
+  </head>
+  <body onload="prettyPrint()">
+    <h1>Glazz</h1>
+
+    <div class="byline">by <a href='http://maryrosecook.com'>mary rose cook</a></div>
+
+    <h4><a href='http://github.com/maryrosecook/glazz'>Get the code from Github</a></h4>
+
+    <h2>What is Glazz?</h2>
+
+    <p>
+      Glazz models vision in a 2D world.
+    </p>
+
+    <div class="demo_holder"><canvas id="sonar" width="200" height="200"></canvas></div>
+    <div class="demo_description">
+      A <strong>sonar</strong> rotates, shooting out a single beam.  If the beam hits
+      a circle, the circle is momentarily marked.
+      <br/></br/>
+      Learn <a href='#lookto'>more</a> about <code>lookTo()</code>.
+    </div>
+
+    <div class="demo_holder"><canvas id="floodlights" width="200" height="200"></canvas></div>
+    <div class="demo_description">
+      A <strong>floodlight</strong> rotates.
+      If any circles are caught in its span, they are lit up.
+      <br/></br/>
+      Learn <a href='#lookto'>more</a> about <code>lookAcross()</code>.
+    </div>
+
+    <div class="demo_holder"><canvas id="spotter" width="200" height="200"></canvas></div>
+    <div class="demo_description">
+      Intelligence feeds coordinates of new circle sightings to a <strong>spotter</strong>.  The spotter
+      sights the coordinates.  If they see a circle, they momentarily mark it.
+      <br/></br/>
+      Learn <a href='#lookto'>more</a> about <code>lookAt()</code>.
+    </div>
+
+    <h2>Can I see an example?</h2>
+
+    <p>
+      Require <code>SolidityMap</code>.  Instantiate it, passing in the width and height
+      of your world.  This initialises every solidity map cell to 0, the empty material value.
+    </p>
+
+<pre class="prettyprint">
+  var SolidityMap = require('src/solidityMap').SolidityMap;
+  var sm = new SolidityMap(10, 10);
+</pre>
+
+    <p>
+      Define an <code>Obj</code> constructor that includes <code>getPosition()</code>,
+      <code>getSize()</code> and <code>getMaterial()</code> accessors.  Use it to
+      instantiate an actor.
+    </p>
+
+<pre class="prettyprint">
+  var Obj = function(posX, posY, sizeX, sizeY) {
+    this.pos = { x:posX, y:posY };
+    this.size = { x:sizeX, y:sizeY };
+
+    this.getPosition = function() {
+      return this.pos;
+    },
+
+    this.getSize = function() {
+      return this.size;
+    },
+
+    this.getMaterial = function() {
+      return 1;
+    }
+  }
+
+  var actor = new Obj(1, 1, 1, 1);
+</pre>
+
+    <p>
+      Give the actor eyes.
+    </p>
+
+<pre class="prettyprint">
+  var eyes = new Eyes(actor, sm);
+</pre>
+
+    <p>
+      Instantiate an object for the actor to look at.  Put it in the solidity map.
+    </p>
+
+<pre class="prettyprint">
+  var obj = new Obj(3, 3, 1, 1);
+  sm.updateObj(obj);
+</pre>
+
+    <p>
+      Make the actor look at the object.  See that he sees.
+    </p>
+
+<pre class="prettyprint">
+  var lookEndpoint = eyes.lookAt(obj);
+  console.log(lookEndpoint.obj === obj); // => true
+</pre>
+
+    <p>
+      The object moves.  Update the solidity map.
+    </p>
+
+<pre class="prettyprint">
+  obj.pos = { x:4, y:4 };
+  sm.clearMaterial(obj.getMaterial());
+  sm.updateObj(obj);
+</pre>
+
+
+    <h2>Reference</h2>
+
+    <h3>Solidity Map</h3>
+
+    <p>
+      A solidity map is a two-dimensional array that represents the world.  It has one
+      cell for each point that can be occupied.  Each cell contains a number that represents
+      the substance occupying that point.
+    </p>
+
+    <h4><code>new SolidityMap(width, height)</code></h4>
+
+    <p>
+      <strong>width</strong> the width of the solidity map.<br/>
+      <strong>height</strong> the height of the solidity map.<br/>
+    </p>
+
+    <h4><code>clearMaterial(material)</code></h4>
+
+    <p>
+      <strong>material</strong> integer representing material to clear from sm.<br/>
+    </p>
+
+    <p>
+      Sets to 0 all solidity map cells containing this material.  This is often invoked
+      before calling <code>updateObj()</code> to update the solidity map with the new
+      positions of objects composed of the passed material.
+    </p>
+
+    <h4><code>updateObj(obj)</code></h4>
+
+    <p>
+      <strong>obj</strong> the object for which to update solidity map<br/>
+    </p>
+
+    <p>
+      Sets the cells covered by this object to the material that represents the object.
+      Object must implement <code>getPosition()</code>, <code>getSize()</code>
+      and <code>getMaterial()</code>.
+    </p>
+
+    <h4><code>update(coordinates, dimensions, material)</code></h4>
+
+    <p>
+      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
+      attributes representing top-left of area to update.<br/>
+      <strong>dimensions</strong> object with <code>x</code> and <code>y</code>
+      attributes representing dimensions of area to update.<br/>
+      <strong>material</strong> integer representing the material covering the cells.<br/>
+    </p>
+
+    <p>
+      Sets the cells covered to the material passed.
+    </p>
+
+    <h4><code>get(coordinates)</code></h4>
+
+    <p>
+      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
+      attributes representing coordinates of cell to get<br/>
+      <strong>returns</strong> material of cell at coordinate.<br/>
+    </p>
+
+    <h4><code>getArea(coordinates, dimensions)</code></h4>
+
+    <p>
+      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
+      attributes representing top-left of area to get.<br/>
+      <strong>dimensions</strong> object with <code>x</code> and <code>y</code>
+      attributes representing dimensions of area to get.<br/>
+      <strong>returns</strong> two-dimensional array of cells covered by area.<br/>
+    </p>
+
+    <h4><code>print([tilesize])</code></h4>
+
+    <p>
+      <strong>tilesize (optional)</strong> integer size of tiles in the world that
+      the solidity map represents.<br/>
+      <strong>returns</strong> array of cells in solidity map.<br/>
+    </p>
+
+    <p>
+      Prints out and returns a grid representing the solidity map.  If supplied,
+      <code>tilesize</code> indicates that cells in blocks of
+      <code>tilesize</code> are homogoneous and may be consolidated into a single
+      array entry when printed.
+    </p>
+
+    <h3>Eyes</h3>
+
+    <h4><code>new Eyes(actor, sm, [overlook])</code></h4>
+
+    <p>
+      <strong>actor</strong> object to give eyes.<br/>
+      <strong>sm</strong> solidity map representing the world.<br/>
+      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      by default when raycasting.<br/>
+    </p>
+
+    <p>
+      Constructor takes an actor to see for and a solidity map to look across.  <code>overlook</code>
+      can be specified as a default set of materials to overlook when raycasting.
+    </p>
+
+<pre class="prettyprint">
+  var eyes = new Eyes(obj, sm, [1, 7, 9]);
+</pre>
+
+    <h4><a id="lookat"></a><code>lookAt(obj, [overlook])</code></h4>
+
+    <p>
+      <strong>obj</strong> object to look at.<br/>
+      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      when raycasting. Overrides default overlook.<br/>
+      <strong>returns</strong> Endpoint object.<br/>
+    </p>
+
+    <p>
+      Shoots a ray at the passed object.  Returns an
+      <a href="#endpoint"><code>Endpoint</code></a> object that represents
+      the point at which the ray encountered
+      an impassable cell.  Returns <code>undefined</code> if the ray hits nothing.
+      This might happen if the object is somehow outside the solidity map.
+    </p>
+
+    <h4><a id="lookto"></a><code>lookTo(vector, [overlook])</code></h4>
+
+    <p>
+      <strong>vector</strong> direction to look in.<br/>
+      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      when raycasting. Overrides default overlook.<br/>
+      <strong>returns</strong> Endpoint object.<br/>
+    </p>
+
+    <p>
+      Shoots a ray in the passed direction.  Returns an
+      <a href="#endpoint"><code>Endpoint</code></a> object that represents
+      the point at which the ray encountered
+      an impassable cell.  Returns <code>undefined</code> if the ray hits nothing
+      before going outside the solidity map.
+    </p>
+
+    <h4><a id="lookacross"></a><code>lookAcross(objs, facing, span, [overlook])</code></h4>
+
+    <p>
+      <strong>objs</strong> objects to survey.<br/>
+      <strong>facing</strong> angle in degrees of centre of gaze.<br/>
+      <strong>fov</strong> angle in degrees of left to right span of gaze.<br/>
+      <strong>returns</strong> Endpoint object.<br/>
+    </p>
+
+    <p>
+      Filters out all the passed objects that do not fall in the passed span.
+      Calls <a href="#lookat"><code>lookAt</code></a> for each remaining
+      object and returns corresponding <code>Endpoint</code> objects.
+    </p>
+
+    <h3>Endpoint</h3>
+
+    <p>
+      Represents the place a cast ray hit.
+    </p>
+
+    <p>
+      <strong>point</strong> coordinates at which the ray stopped.<br/>
+      <strong>lineOfSight</strong> array of points along the cast ray.<br/>
+      <strong>material</strong> material at the point at which the ray stopped.<br/>
+    </p>
+
+    <hr/>
+    <div class="footer">
+      <a href="http://maryrosecook.com">maryrosecook.com</a>
+    </div>
+   </body>
+ </html>
