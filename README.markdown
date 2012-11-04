@@ -40,6 +40,54 @@ See `/index.html`
 
 ## Example
 
+Require <code>SolidityMap</code>.  Instantiate it, passing in the width and height
+of your world.  This initialises every solidity map cell to 0, the empty material value.
+
+    var SolidityMap = require('src/solidityMap').SolidityMap;
+    var sm = new SolidityMap(10, 10);
+
+Define an <code>Obj</code> constructor that includes <code>getPosition()</code>,
+<code>getSize()</code> and <code>getMaterial()</code> accessors.  Use it to
+instantiate an actor.
+
+    var Obj = function(posX, posY, sizeX, sizeY) {
+      this.pos = { x:posX, y:posY };
+      this.size = { x:sizeX, y:sizeY };
+
+      this.getPosition = function() {
+        return this.pos;
+      },
+
+      this.getSize = function() {
+        return this.size;
+      },
+
+      this.getMaterial = function() {
+        return 1;
+      }
+    }
+
+    var actor = new Obj(1, 1, 1, 1);
+
+Give the actor eyes.
+
+    var eyes = new Eyes(actor, sm);
+
+Instantiate an object for the actor to look at.  Put it in the solidity map.
+
+    var obj = new Obj(3, 3, 1, 1);
+    sm.updateObj(obj);
+
+Make the actor look at the object.  See that he sees.
+
+    var lookEndpoint = eyes.lookAt(obj);
+    console.log(lookEndpoint.obj === obj); // => true
+
+The object moves.  Update the solidity map with its new position.
+
+    obj.pos = { x:4, y:4 };
+    sm.clearMaterial(obj.getMaterial());
+    sm.updateObj(obj);
 
 ## Run the tests
 
