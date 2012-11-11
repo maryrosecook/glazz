@@ -4,7 +4,7 @@
 * http://maryrosecook.com
 * maryrosecook@maryrosecook.com
 
-Give your objects eyes.
+Model vision in a 2D world.
 
 ## Get the code
 
