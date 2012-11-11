@@ -103,14 +103,16 @@
     draw: function() {
       this.world.ctx.save();
       this.world.ctx.lineWidth = 1.5;
-      helper.drawCircle(this.world.ctx, this, "black", this.fillStyle);
+      helper.drawCircle(this.world.ctx, this, this.strokeStyle, this.fillStyle);
       this.world.ctx.restore();
     },
 
     update: function(fillStyle) {
+      this.strokeStyle = fillStyle;
       this.fillStyle = fillStyle;
       var self = this;
       setTimeout(function() {
+        self.strokeStyle = "black";
         self.fillStyle = "white";
       }, delay);
     },

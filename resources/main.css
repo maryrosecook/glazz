@@ -13,9 +13,9 @@ a:visited { color:black; }
 h1 { font-size: 55px; font-weight:normal; margin-left:-3px;  padding:0; display:inline; }
 h2 { font-size: 30px; font-weight:normal; margin:0; margin-top:16px; margin-bottom:2px; }
 h3 { font-size: 21px; font-weight:normal; margin-top:16px; margin-bottom:16px;  }
-h4 { font-size: 15px; font-weight:normal; margin-top:18px; margin-bottom:18px; }
+h4 { font-size: 15px; font-weight:normal; margin-top:16px; margin-bottom:16px; }
 
-p { line-height:15px; }
+p { line-height:15px; margin:16px 0 16px 0; }
 
 hr { color: #aaa; background-color:#aaa; height:1px; border:0; }
 

@@ -66,8 +66,8 @@
     <h2>Can I see an example?</h2>
 
     <p>
-      Require <code>SolidityMap</code>.  Instantiate it, passing in the width and height
-      of your world.  This initialises every solidity map cell to 0, the empty material value.
+      I require <code>SolidityMap</code>.  I instantiate it, passing in the width and height
+      of your world.  This initialises every cell to 0, meaning empty.
     </p>
 
 <pre class="prettyprint">
@@ -76,9 +76,9 @@
 </pre>
 
     <p>
-      Define an <code>Obj</code> constructor that includes <code>getPosition()</code>,
-      <code>getSize()</code> and <code>getMaterial()</code> accessors.  Use it to
-      instantiate the actor, the object that will have eyes.
+      I define an <code>Obj</code> constructor that includes <code>getPosition()</code>,
+      <code>getSize()</code> and <code>getMaterial()</code> accessors.  I use it to
+      instantiate the actor, which is the object that will have eyes.
     </p>
 
 <pre class="prettyprint">
@@ -103,7 +103,7 @@
 </pre>
 
     <p>
-      Give the actor eyes.
+      I give the actor eyes.
     </p>
 
 <pre class="prettyprint">
@@ -111,7 +111,7 @@
 </pre>
 
     <p>
-      Instantiate an object for the actor to look at.  Put it in the solidity map.
+      I instantiate an object for the actor to look at.  I put it in the solidity map.
     </p>
 
 <pre class="prettyprint">
@@ -120,7 +120,7 @@
 </pre>
 
     <p>
-      Make the actor look at the object.  See that he sees.
+      I make the actor look at the object.  I see that he sees.
     </p>
 
 <pre class="prettyprint">
@@ -129,7 +129,7 @@
 </pre>
 
     <p>
-      The object moves.  Update the solidity map with its new position.
+      The object moves.  I update the solidity map with its new position.
     </p>
 
 <pre class="prettyprint">
@@ -144,7 +144,7 @@
     <h3>Solidity Map</h3>
 
     <p>
-      A solidity map is a two-dimensional array that represents the world.  It has one
+      A solidity map holds a two-dimensional array that represents the world.  It has one
       cell for each point that can be occupied.  Each cell contains a number that represents
       the substance occupying that point.
     </p>
@@ -152,14 +152,14 @@
     <h4><code>new SolidityMap(width, height)</code></h4>
 
     <p>
-      <strong>width</strong> the width of the solidity map.<br/>
-      <strong>height</strong> the height of the solidity map.<br/>
+      width: the width of the solidity map.<br/>
+      height: the height of the solidity map.<br/>
     </p>
 
     <h4><code>clearMaterial(material)</code></h4>
 
     <p>
-      <strong>material</strong> integer representing material to clear from sm.<br/>
+      material: integer representing material to clear from sm.<br/>
     </p>
 
     <p>
@@ -171,7 +171,7 @@
     <h4><code>updateObj(obj)</code></h4>
 
     <p>
-      <strong>obj</strong> the object for which to update solidity map<br/>
+      obj: the object for which to update solidity map<br/>
     </p>
 
     <p>
@@ -183,11 +183,11 @@
     <h4><code>update(coordinates, dimensions, material)</code></h4>
 
     <p>
-      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
+      coordinates: object with <code>x</code> and <code>y</code>
       attributes representing top-left of area to update.<br/>
-      <strong>dimensions</strong> object with <code>x</code> and <code>y</code>
+      dimensions: object with <code>x</code> and <code>y</code>
       attributes representing dimensions of area to update.<br/>
-      <strong>material</strong> integer representing the material covering the cells.<br/>
+      material: integer representing the material covering the cells.<br/>
     </p>
 
     <p>
@@ -197,27 +197,27 @@
     <h4><code>get(coordinates)</code></h4>
 
     <p>
-      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
-      attributes representing coordinates of cell to get<br/>
-      <strong>returns</strong> material of cell at coordinate.<br/>
+      coordinates: object with <code>x</code> and <code>y</code>
+      attributes representing coordinates of cell to get.<br/>
+      returns: material of cell at coordinate.<br/>
     </p>
 
     <h4><code>getArea(coordinates, dimensions)</code></h4>
 
     <p>
-      <strong>coordinates</strong> object with <code>x</code> and <code>y</code>
+      coordinates: object with <code>x</code> and <code>y</code>
       attributes representing top-left of area to get.<br/>
-      <strong>dimensions</strong> object with <code>x</code> and <code>y</code>
+      dimensions: object with <code>x</code> and <code>y</code>
       attributes representing dimensions of area to get.<br/>
-      <strong>returns</strong> two-dimensional array of cells covered by area.<br/>
+      returns: two-dimensional array of cells covered by area.<br/>
     </p>
 
     <h4><code>print([tilesize])</code></h4>
 
     <p>
-      <strong>tilesize (optional)</strong> integer size of tiles in the world that
+      tilesize (optional): integer size of tiles in the world that
       the solidity map represents.<br/>
-      <strong>returns</strong> array of cells in solidity map.<br/>
+      returns: array of cells in solidity map.<br/>
     </p>
 
     <p>
@@ -232,9 +232,9 @@
     <h4><code>new Eyes(actor, sm, [overlook])</code></h4>
 
     <p>
-      <strong>actor</strong> object to give eyes.<br/>
-      <strong>sm</strong> solidity map representing the world.<br/>
-      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      actor: object to give eyes.<br/>
+      sm: solidity map representing the world.<br/>
+      overlook (optional): array of materials that should be overlooked
       by default when raycasting.<br/>
     </p>
 
@@ -250,10 +250,10 @@
     <h4><a id="lookat"></a><code>lookAt(obj, [overlook])</code></h4>
 
     <p>
-      <strong>obj</strong> object to look at.<br/>
-      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      obj: object to look at.<br/>
+      overlook (optional): array of materials that should be overlooked
       when raycasting. Overrides default overlook.<br/>
-      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
+      returns: <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
@@ -267,10 +267,10 @@
     <h4><a id="lookto"></a><code>lookTo(vector, [overlook])</code></h4>
 
     <p>
-      <strong>vector</strong> direction to look in.<br/>
-      <strong>overlook (optional)</strong> array of materials that should be overlooked
+      vector: direction to look in.<br/>
+      overlook (optional): array of materials that should be overlooked
       when raycasting. Overrides default overlook.<br/>
-      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
+      returns: <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
@@ -284,10 +284,10 @@
     <h4><a id="lookacross"></a><code>lookAcross(objs, facing, span, [overlook])</code></h4>
 
     <p>
-      <strong>objs</strong> objects to survey.<br/>
-      <strong>facing</strong> angle in degrees of centre of gaze.<br/>
-      <strong>fov</strong> angle in degrees of left to right span of gaze.<br/>
-      <strong>returns</strong> <a href="#endpoint">Endpoint</a> object.<br/>
+      objs: objects to survey.<br/>
+      facing: angle in degrees of centre of gaze.<br/>
+      span: angle in degrees of left to right span of gaze.<br/>
+      returns: <a href="#endpoint">Endpoint</a> object.<br/>
     </p>
 
     <p>
@@ -303,9 +303,9 @@
     </p>
 
     <p>
-      <strong>point</strong> coordinates at which the ray stopped.<br/>
-      <strong>lineOfSight</strong> array of points along the cast ray.<br/>
-      <strong>material</strong> material at the point at which the ray stopped.<br/>
+      point: coordinates at which the ray stopped.<br/>
+      lineOfSight: array of points along the cast ray.<br/>
+      material: material at the point at which the ray stopped.<br/>
     </p>
 
     <hr/>
