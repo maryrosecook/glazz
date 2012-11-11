@@ -93,7 +93,7 @@ The object moves.  Update the solidity map with its new position.
 
 Install Node.js and npm: https://github.com/isaacs/npm
 
-Install the node dependencies and run the tests
+Install the node dependencies and run the tests with:
 
     $ cd path/to/glazz
     $ npm install
