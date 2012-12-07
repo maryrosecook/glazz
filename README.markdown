@@ -14,8 +14,6 @@ To install npm, visit https://github.com/isaacs/npm
 
 Install Glazz
 
-### node
-
     $ npm install glazz
 
 ### Git
