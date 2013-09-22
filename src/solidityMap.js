@@ -24,7 +24,7 @@
   };
 
   SolidityMap.prototype = {
-    updateObj: function(obj) {
+    updateWithObj: function(obj) {
       this.update(obj.getPosition(), obj.getSize(), obj.getMaterial());
     },
 

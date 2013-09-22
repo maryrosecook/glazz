@@ -116,7 +116,7 @@ describe('solidity map', function() {
     });
   });
 
-  describe('updateObj', function() {
+  describe('updateWithObj', function() {
     var obj;
     beforeEach(function () {
       obj = new Obj();
@@ -125,7 +125,7 @@ describe('solidity map', function() {
     });
 
     it('should be able to update w/ an obj made for Glazz', function() {
-      sm.updateObj(obj);
+      sm.updateWithObj(obj);
       expect(sm.sm).toEqual([[0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
@@ -134,7 +134,14 @@ describe('solidity map', function() {
     });
 
     it('should be able to cope w/ fp input', function() {
-      sm.updateObj(obj);
+      sm.updateWithObj(obj);
+      expect(sm.sm).toEqual([[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 1, 1, 1],
+                             [0, 0, 1, 1, 1]]);
+    });
+  });
       expect(sm.sm).toEqual([[0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
