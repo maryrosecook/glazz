@@ -388,7 +388,7 @@
       this.update(obj.getPosition(), obj.getSize(), obj.getMaterial());
     },
 
-    clearObj: function() {
+    clearObj: function(obj) {
       this.update(obj.getPosition(), obj.getSize(), 0);
     },
 
