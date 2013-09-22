@@ -28,6 +28,10 @@
       this.update(obj.getPosition(), obj.getSize(), obj.getMaterial());
     },
 
+    clearObj: function(obj) {
+      this.update(obj.getPosition(), obj.getSize(), 0);
+    },
+
     // adds a block of material to the solidityMap
     update: function(point, dimensions, material) {
       var p = { x:Math.floor(point.x), y:Math.floor(point.y) };

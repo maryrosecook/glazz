@@ -142,11 +142,29 @@ describe('solidity map', function() {
                              [0, 0, 1, 1, 1]]);
     });
   });
+
+  describe('clearObj', function() {
+    var obj;
+    beforeEach(function () {
+      obj = new Obj();
+      obj.pos = { x:2, y:3 };
+      obj.size = { x:3, y:2 };
+    });
+
+    it('should be able to update w/ an obj made for Glazz', function() {
+      sm.updateWithObj(obj);
       expect(sm.sm).toEqual([[0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 0, 0, 0],
                              [0, 0, 1, 1, 1],
                              [0, 0, 1, 1, 1]]);
+
+      sm.clearObj(obj);
+      expect(sm.sm).toEqual([[0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0],
+                             [0, 0, 0, 0, 0]]);
     });
   });
 
